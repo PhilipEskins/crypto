@@ -3,13 +3,21 @@ function crypto (text) {
   var textArr = lowerText.split(" ").join("").split("");
   var arrRow = Math.ceil(Math.sqrt(textArr.length));
   var arrCol = Math.ceil(textArr.length / arrRow);
+  var extras = arrRow * arrCol - textArr.length;
+  var strOut = [];
 
-  // for (var i = 0; i<textArr.length; i++) {
-  //   var noSpaces = textArr.filter(i => i != " ");
-  // }
-    console.log(textArr.length);
-    console.log(arrRow);
-    console.log(arrCol);
+  for (var j = 0; j < arrRow-1; j++) {
+    for (var i = j; i<textArr.length; i+=arrCol) {
+      strOut.push(textArr[i]);
+    }
+  }
+  strOut = strOut.filter(function(element) {
+    return element !== undefined;
+  });
+  for (var k = 5; k < strOut.length; k+=6) {
+    strOut.splice(k, 0, " ");
+  }
+  return strOut.join("");
 }
 
 $(document).ready(function(){
